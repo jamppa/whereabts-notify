@@ -3,5 +3,11 @@
 		[midje.sweet]
 		[whereabts-notify.handlers]))
 
-(fact "should define message handlers so that it includes handler for notifying user on replies"
-	message-handlers => {"notify-user-on-reply" notify-user-on-reply-handler})
+(def notify-user-on-reply-message [])
+
+(fact "should define message handlers so that it includes handler for replies"
+	message-handlers => {"replies" reply-handler})
+
+; (fact "should call user reply notifier with notify message in handler"
+; 	(notify-user-on-reply-handler notify-user-on-reply-message) => notify-user-on-reply-message
+; 	(provided (notify-user-on-reply) => anything :times 1))

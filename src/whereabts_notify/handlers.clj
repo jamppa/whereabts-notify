@@ -1,10 +1,9 @@
 (ns whereabts-notify.handlers
 	(:require [taoensso.carmine :as carmine]))
 
-(def notify-user-on-reply-channel "notify-user-on-reply")
+(def reply-channel "replies")
 
-(defn notify-user-on-reply-handler [msg]
-	)
+(defn reply-handler [msg] nil)
 
 (def message-handlers
-	{notify-user-on-reply-channel notify-user-on-reply-handler})
+	{reply-channel reply-handler})
