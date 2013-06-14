@@ -9,4 +9,4 @@
 (defn -main
   [& args]
   (carmine/with-new-pubsub-listener 
-  	redis-spec message-handlers (carmine/subscribe notify-user-on-reply-channel)))
+  	redis-spec message-handlers (carmine/subscribe reply-channel)))
