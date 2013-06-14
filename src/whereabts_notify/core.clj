@@ -1,7 +1,12 @@
 (ns whereabts-notify.core
+	(:require [taoensso.carmine :as carmine])
+	(:use [whereabts-notify.handlers])
   (:gen-class))
 
+(def redis-pool (carmine/make-conn-pool))
+(def redis-spec (carmine/make-conn-spec))
+
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (carmine/with-new-pubsub-listener 
+  	redis-spec message-handlers (carmine/subscribe notify-user-on-reply-channel)))
