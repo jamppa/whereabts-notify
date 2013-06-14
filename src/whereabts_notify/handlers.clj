@@ -4,9 +4,12 @@
 
 (def reply-channel "replies")
 
+(defn- notify-from-msg [msg]
+	(get msg 2))
+
 (defn reply-handler [msg]
-	(when (not (nil? (get msg 2))) 
-		(notify-user-on-reply (get msg 2)))
+	(when (not (nil? (notify-from-msg msg))) 
+		(notify-user-on-reply (notify-from-msg msg)))
 	msg)
 
 (def message-handlers
