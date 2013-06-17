@@ -2,7 +2,7 @@
 	(:use [whereabts-notify.replies])
 	(:require [taoensso.carmine :as carmine]))
 
-(def reply-channel "replies")
+(def reply-channel "message.replies")
 
 (defn- notify-from-msg [msg]
 	(get msg 2))
