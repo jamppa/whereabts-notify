@@ -1,0 +1,4 @@
+kill `cat /whereabts/whereabts-notify/RUNNING_PID`
+cp -v whereabts-notify-0.1.0-SNAPSHOT-standalone.jar /whereabts/whereabts-notify/whereabts-notify.jar
+java -jar /whereabts/whereabts-notify/whereabts-notify.jar &
+echo $! > /whereabts/whereabts-notify/RUNNING_PID
