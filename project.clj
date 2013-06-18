@@ -3,8 +3,12 @@
   :url "http://whereabts.com"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.5.1"]
-				[com.taoensso/carmine "1.12.0"]]
+  :dependencies 
+        [[org.clojure/clojure "1.5.1"]
+        [com.novemberain/monger "1.5.0"]
+				[com.taoensso/carmine "1.12.0"]
+        [clj-http "0.7.0"]
+        [org.clojure/data.json "0.2.2"]]
    :profiles {
       :dev {
          :dependencies [[midje "1.5.1"]]
