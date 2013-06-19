@@ -9,3 +9,6 @@
 
 (fact "should find user with object id"
 	(find-user "509d513f61395f0ebbd5e38a") => user-a)
+
+(fact "should find gcm id of user"
+	(find-user-gcm-id "509d513f61395f0ebbd5e38a") => "123AbC")
