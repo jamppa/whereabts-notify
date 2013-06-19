@@ -9,3 +9,6 @@
 	:created-at 1364642721970
 	:last-seen-at 1364642721970
 	:gcm-id "123AbC"})
+
+(def user-b 
+	(merge (dissoc user-a :gcm-id) {:_id (ObjectId. "509d513f61395f0ebbd5e38b")}))

@@ -18,7 +18,7 @@
 
 (defn populate-test-db []
 	(clear-collections ["anonymous_users"])
-	(insert-test-objects "anonymous_users" [user-a]))
+	(insert-test-objects "anonymous_users" [user-a user-b]))
 
 (defn setup-test-db []
 	(binding [*whereabts-db* test-db-name]
