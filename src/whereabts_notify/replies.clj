@@ -11,6 +11,7 @@
 			:type reply-message-type 
 			:message-id (:replied-message details)}))
 
-(defn notify-user-on-reply [reply-details]
-	(let [user-gcm-id (find-user-gcm-id (:user-to-notify reply-details))]
-		(send-gcm-message (replies-gcm-message user-gcm-id reply-details))))
+(defn notify-user-on-reply [details]
+	(if-let [user-gcm-id (find-user-gcm-id (:user-to-notify details))]
+		(send-gcm-message (replies-gcm-message user-gcm-id details))
+		nil))
