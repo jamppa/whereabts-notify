@@ -12,3 +12,7 @@
 
 (defn find-user [id]
 	(find-one-from-users {:_id (ObjectId. id)}))
+
+(defn find-user-gcm-id [id]
+	(let [user (find-user id)]
+		(:gcm-id user)))

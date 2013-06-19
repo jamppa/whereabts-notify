@@ -4,12 +4,12 @@
 
 (def reply-channel "message.replies")
 
-(defn- content-from-msg [msg]
+(defn- details-from-msg [msg]
 	(get msg 2))
 
 (defn reply-handler [msg]
-	(when (not (nil? (content-from-msg msg))) 
-		(notify-user-on-reply (content-from-msg msg)))
+	(when (not (nil? (details-from-msg msg))) 
+		(notify-user-on-reply (details-from-msg msg)))
 	msg)
 
 (def message-handlers
