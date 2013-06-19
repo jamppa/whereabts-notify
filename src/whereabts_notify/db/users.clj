@@ -1,8 +1,7 @@
 (ns whereabts-notify.db.users
 	(:require 
         [monger.core :as monger]
-        [monger.collection :as monger-col]
-        [monger.json])
+        [monger.collection :as monger-col])
 	(:import [org.bson.types ObjectId]))
 
 (def users-coll "anonymous_users")
