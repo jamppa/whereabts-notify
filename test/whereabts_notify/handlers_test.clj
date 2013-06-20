@@ -4,7 +4,7 @@
 		[whereabts-notify.handlers]
 		[whereabts-notify.replies]))
 
-(def reply-details {:user-to-notify "123" :replied-message "abc"})
+(def reply-details {:user-to-notify "123" :replied-message "abc" :reply {:key "val"}})
 (def reply-channel-msg ["message" "message.replies" reply-details])
 (def reply-channel-msg-invalid ["message" "message.replies" {}])
 (def reply-channel-msg-with-nil ["type" "channel"])

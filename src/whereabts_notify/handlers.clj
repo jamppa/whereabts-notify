@@ -8,7 +8,8 @@
 (def reply-details-validation
 	(validation-set
 		(presence-of :replied-message)
-		(presence-of :user-to-notify)))
+		(presence-of :user-to-notify)
+		(presence-of :reply)))
 
 (defn- details-from-msg [msg]
 	(get msg 2))
