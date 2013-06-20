@@ -8,7 +8,7 @@
 (def reply-details {:replied-message "abc" :user-to-notify "123"})
 (def reply-gcm-message {
 		:registration_ids ["abc"] 
-		:data {:type 0 :message-id (:replied-message reply-details)}})
+		:data {:type "TYPE_MESSAGE_REPLY" :message-id (:replied-message reply-details)}})
 
 (fact "should notify user on reply by sending gcm message"
 	(notify-user-on-reply reply-details) => anything
