@@ -9,7 +9,8 @@
 	(gcm-message [gcm-id] 
 		{
 			:type reply-message-type 
-			:message-id (:replied-message details)}))
+			:message-id (:replied-message details)
+			:reply (:reply details)}))
 
 (defn notify-user-on-reply [details]
 	(if-let [user-gcm-id (find-user-gcm-id (:user-to-notify details))]
