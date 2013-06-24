@@ -9,3 +9,6 @@
 
 (fact "should find reply by its id"
 	(find-reply "509d513f61395f0ebbd5e39a") => reply-a)
+
+(fact "should return nil when trying to find reply that doesnt exist"
+	(find-reply "509d513f61395f0ebbd5e666") => nil)
