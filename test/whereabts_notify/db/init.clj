@@ -1,7 +1,8 @@
 (ns whereabts-notify.db.init
 	(:use 
 		[whereabts-notify.db.conn]
-		[whereabts-notify.db.users-test-fixtures])
+		[whereabts-notify.db.users-test-fixtures]
+		[whereabts-notify.db.replies-test-fixtures])
 	(:require 
 		[monger.core :as monger]
 		[monger.collection :as monger-col]))
@@ -17,8 +18,9 @@
 		(monger-col/remove coll)))
 
 (defn populate-test-db []
-	(clear-collections ["anonymous_users"])
-	(insert-test-objects "anonymous_users" [user-a user-b]))
+	(clear-collections ["anonymous_users" "replies"])
+	(insert-test-objects "anonymous_users" [user-a user-b])
+	(insert-test-objects "replies" [reply-a]))
 
 (defn setup-test-db []
 	(binding [*whereabts-db* test-db-name]
