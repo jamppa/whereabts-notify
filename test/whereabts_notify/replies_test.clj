@@ -6,14 +6,13 @@
 		[whereabts-notify.db.replies]
 		[whereabts-notify.gcm]))
 
-(def reply {:nick "seppo" :replymessage "cool!"})
-(def reply-details {:replied-message "abc" :user-to-notify "123" :reply "567"})
+(def reply {:replymessage "cool!"})
+(def reply-details {:message-id "abc" :user-id "123" :reply-id "567"})
 (def reply-gcm-message {
 		:registration_ids ["abc"] 
 		:data {
 			:type "TYPE_MESSAGE_REPLY" 
-			:message-id (:replied-message reply-details)
-			:reply-nick "seppo"
+			:message-id (:message-id reply-details)
 			:reply-message "cool!"}})
 
 (fact "should notify user on reply by sending gcm message"

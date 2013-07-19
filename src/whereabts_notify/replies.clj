@@ -11,12 +11,11 @@
 		{
 			:type reply-message-type 
 			:message-id message-id
-			:reply-nick (:nick reply)
 			:reply-message (:replymessage reply)}))
 
 (defn notify-user-on-reply [details]
-	(if-let [user-gcm-id (find-user-gcm-id (:user-to-notify details))]
-		(if-let [reply (find-reply (:reply details))]
+	(if-let [user-gcm-id (find-user-gcm-id (:user-id details))]
+		(if-let [reply (find-reply (:reply-id details))]
 			(send-gcm-message 
-				(replies-gcm-message user-gcm-id reply (:replied-message details)))
+				(replies-gcm-message user-gcm-id reply (:message-id details)))
 		nil)))

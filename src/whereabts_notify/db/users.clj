@@ -4,7 +4,7 @@
         [monger.collection :as monger-col])
 	(:import [org.bson.types ObjectId]))
 
-(def users-coll "anonymous_users")
+(def users-coll "users")
 
 (defn- find-one-from-users [query]
 	(monger-col/find-one-as-map users-coll query))
