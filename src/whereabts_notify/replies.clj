@@ -11,7 +11,8 @@
 		{
 			:type reply-message-type 
 			:message-id message-id
-			:reply reply}))
+			:reply-nick (get-in reply [:user-profile :nick])
+			:reply-message (get-in reply [:replymessage])}))
 
 (defn find-reply-with-user [reply-id]
 	(-> reply-id

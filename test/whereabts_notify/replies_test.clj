@@ -13,7 +13,8 @@
 		:data {
 			:type "TYPE_MESSAGE_REPLY" 
 			:message-id (:message-id reply-details)
-			:reply reply}})
+			:reply-nick "jami"
+			:reply-message "cool!"}})
 
 (fact "should find reply with userprofile"
 	(find-reply-with-user "123") => reply
