@@ -10,5 +10,12 @@
 	:last-seen-at 1364642721970
 	:gcm-id "123AbC"})
 
+(def user-a-profile {
+	:_id (ObjectId. "509d513f61395f0ebbd5e50a")
+	:user_id (:_id user-a)
+	:nick "jami"
+	:country "fi"
+	:description ""})
+
 (def user-b 
 	(merge (dissoc user-a :gcm-id) {:_id (ObjectId. "509d513f61395f0ebbd5e38b")}))

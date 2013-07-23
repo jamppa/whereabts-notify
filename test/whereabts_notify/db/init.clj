@@ -18,8 +18,9 @@
 		(monger-col/remove coll)))
 
 (defn populate-test-db []
-	(clear-collections ["users" "replies"])
+	(clear-collections ["users" "replies" "profiles"])
 	(insert-test-objects "users" [user-a user-b])
+	(insert-test-objects "profiles" [user-a-profile])
 	(insert-test-objects "replies" [reply-a]))
 
 (defn setup-test-db []

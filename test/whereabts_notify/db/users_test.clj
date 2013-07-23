@@ -21,3 +21,16 @@
 
 (fact "should return nil when finding gcm id of nonexisting user"
 	(find-user-gcm-id "509d513f61395f0ebbd5e666") => nil)
+
+(fact "should find userprofile by user id"
+	(find-profile-by-user-id (:_id user-a)) => user-a-profile)
+
+(fact "should not find userprofile by user id that doesnt exist"
+	(find-profile-by-user-id (:_id user-b)) => nil)
+
+(def obj {:user_id (:_id user-a)})
+(fact "should merge object with userprofile if object belongs to user"
+	(with-profile obj) => (merge obj {:user-profile user-a-profile}))
+
+(fact "shoult not merge object with userprofile if object doesnt belong to any user"
+	(with-profile {:key "val"}) => {:key "val"})
