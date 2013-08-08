@@ -8,14 +8,16 @@
 (def user-profiles-coll "profiles")
 
 (defn find-user [id]
-	(monger-col/find-one-as-map users-coll {:_id (ObjectId. id)}))
+	(monger-col/find-one-as-map 
+		users-coll {:_id (ObjectId. id)}))
 
 (defn find-user-gcm-id [id]
 	(let [user (find-user id)]
 		(:gcm-id user)))
 
 (defn find-profile-by-user-id [user-id]
-	(monger-col/find-one-as-map user-profiles-coll {:user_id user-id}))
+	(monger-col/find-one-as-map 
+		user-profiles-coll {:user_id user-id}))
 
 (defn with-profile [obj]
 	(if (contains? obj :user_id)
