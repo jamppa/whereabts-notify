@@ -21,7 +21,7 @@
 	(clear-collections ["users" "replies" "profiles"])
 	(insert-test-objects "users" [user-a user-b])
 	(insert-test-objects "profiles" [user-a-profile])
-	(insert-test-objects "replies" [reply-a]))
+	(insert-test-objects "replies" [reply-a reply-b reply-c]))
 
 (defn setup-test-db []
 	(binding [*whereabts-db* test-db-name]
