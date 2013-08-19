@@ -36,3 +36,13 @@
 		(find-user-gcm-id "321") => "abc" :times 1
 		(notify-message-owner-on-reply reply "abc" "012") => anything :times 0))
 
+(fact "should send gcm-message when notifying message owner on reply"
+	(notify-message-owner-on-reply reply "abc" "012") => reply-gcm-message
+	(provided
+		(send-gcm-message reply-gcm-message) => reply-gcm-message :times 1))
+
+(fact "should not send gcm-message when gcm-id is nil"
+	(notify-message-owner-on-reply reply nil "012") => anything
+	(provided
+		(send-gcm-message anything) => anything :times 0))
+
