@@ -14,12 +14,15 @@
 
 (fact "should notify user on new reply in reply handler when details are valid"
 	(reply-handler reply-channel-msg) => reply-channel-msg
-	(provided (notify-user-on-reply reply-details) => anything :times 1))
+	(provided 
+		(notify-message-owner reply-details) => anything :times 1))
 
 (fact "should not notify user on new reply when details are not valid"
 	(reply-handler reply-channel-msg-invalid) => reply-channel-msg-invalid
-	(provided (notify-user-on-reply {}) => anything :times 0))
+	(provided 
+		(notify-message-owner {}) => anything :times 0))
 
 (fact "should not notify user on new reply if message is nil"
 	(reply-handler reply-channel-msg-with-nil) => reply-channel-msg-with-nil
-	(provided (notify-user-on-reply nil) => anything :times 0))
+	(provided 
+		(notify-message-owner nil) => anything :times 0))

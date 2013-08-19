@@ -19,7 +19,7 @@
 
 (defn reply-handler [msg]
 	(when (valid-details? (details-from-msg msg)) 
-		(notify-user-on-reply (details-from-msg msg)))
+		(notify-message-owner (details-from-msg msg)))
 	msg)
 
 (def message-handlers
