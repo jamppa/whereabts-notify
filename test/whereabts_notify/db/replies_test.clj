@@ -7,7 +7,8 @@
 		[midje.sweet]))
 
 (def message-id (.toString (:message_id reply-a)))
-(def excluding-user-id (:user_id reply-c))
+(def excluding-user-id-a (:_id user-a))
+(def excluding-user-id-b (:_id user-b))
 
 (background (before :facts (setup-test-db)))
 
@@ -19,4 +20,8 @@
 
 (fact "should find replies of a message, excluding replies of users"
 	(find-replies-of-message-excluding-users 
-		message-id [excluding-user-id]) => [reply-a])
+		message-id [excluding-user-id-b]) => [reply-a])
+
+(fact "should not find any replies of a message, when excluding all"
+	(find-replies-of-message-excluding-users
+		message-id [excluding-user-id-a excluding-user-id-b]) => [])
