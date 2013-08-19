@@ -19,3 +19,8 @@
 
 (def user-b 
 	(merge (dissoc user-a :gcm-id) {:_id (ObjectId. "509d513f61395f0ebbd5e38b")}))
+
+(def user-c 
+	(merge user-a {
+		:_id (ObjectId. "509d513f61395f0ebbd5e38c")
+		:gcm-id "123CaB"}))

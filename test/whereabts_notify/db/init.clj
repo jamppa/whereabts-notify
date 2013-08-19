@@ -19,7 +19,7 @@
 
 (defn populate-test-db []
 	(clear-collections ["users" "replies" "profiles"])
-	(insert-test-objects "users" [user-a user-b])
+	(insert-test-objects "users" [user-a user-b user-c])
 	(insert-test-objects "profiles" [user-a-profile])
 	(insert-test-objects "replies" [reply-a reply-b reply-c]))
 

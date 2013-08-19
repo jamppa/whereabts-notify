@@ -34,3 +34,7 @@
 
 (fact "shoult not merge object with userprofile if object doesnt belong to any user"
 	(with-profile {:key "val"}) => {:key "val"})
+
+(fact "should map user ids to gcm ids skipping possible nils"
+	(user-ids-to-gcm-ids 
+		["509d513f61395f0ebbd5e38a" "509d513f61395f0ebbd5e38b" "509d513f61395f0ebbd5e38c"]) => ["123AbC" "123CaB"])
