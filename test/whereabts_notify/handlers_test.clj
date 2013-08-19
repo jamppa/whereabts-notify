@@ -12,17 +12,20 @@
 (fact "should define message handlers so that it includes handler for replies"
 	message-handlers => {"message.replies" reply-handler})
 
-(fact "should notify user on new reply in reply handler when details are valid"
+(fact "should notify message owner and repliers when details are valid"
 	(reply-handler reply-channel-msg) => reply-channel-msg
 	(provided 
-		(notify-message-owner reply-details) => anything :times 1))
+		(notify-message-owner reply-details) => anything :times 1
+		(notify-message-repliers reply-details) => anything :times 1))
 
-(fact "should not notify user on new reply when details are not valid"
+(fact "should not notify message owner and repliers when details are not valid"
 	(reply-handler reply-channel-msg-invalid) => reply-channel-msg-invalid
 	(provided 
-		(notify-message-owner {}) => anything :times 0))
+		(notify-message-owner {}) => anything :times 0
+		(notify-message-repliers {}) => anything :times 0))
 
-(fact "should not notify user on new reply if message is nil"
+(fact "should not notify message owner and repliers when message is nil"
 	(reply-handler reply-channel-msg-with-nil) => reply-channel-msg-with-nil
 	(provided 
-		(notify-message-owner nil) => anything :times 0))
+		(notify-message-owner nil) => anything :times 0
+		(notify-message-repliers nil) => anything :times 0))

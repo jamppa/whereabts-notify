@@ -18,9 +18,11 @@
 	(valid? reply-details-validation details))
 
 (defn reply-handler [msg]
-	(when (valid-details? (details-from-msg msg)) 
-		(notify-message-owner (details-from-msg msg)))
-	msg)
+	(let [reply-details (details-from-msg msg)]
+	(when (valid-details? reply-details) 
+		(notify-message-owner reply-details)
+		(notify-message-repliers reply-details))
+	msg))
 
 (def message-handlers
 	{reply-channel reply-handler})

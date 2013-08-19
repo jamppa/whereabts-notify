@@ -20,7 +20,7 @@
 		(with-profile)))
 
 (defn notify-message-owner-on-reply [reply user-gcm-id message-id]
-	(when (every? identity [reply user-gcm-id message-id])			; there is a change that user-gcm-id is missing
+	(when (every? identity [reply user-gcm-id message-id])			; there is a chance that user-gcm-id is missing
 			(send-gcm-message 
 				(replies-gcm-message user-gcm-id reply message-id))))
 
