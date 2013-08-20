@@ -6,7 +6,7 @@
 	(:import [org.bson.types ObjectId]))
 
 (def notify-owner-message-type "TYPE_MESSAGE_REPLY")
-(def notify-replier-message-type "TYPE_MESSAGE_REPLY_REPLIER")
+(def notify-replier-message-type "TYPE_MESSAGE_REPLY_RESPONDENTS")
 
 (defn- replies-gcm-message [gcm-ids reply message-id type]
 	(gcm-message gcm-ids
@@ -52,4 +52,6 @@
 		  reply-user-id (:user_id reply)
 		  notifiable-gcm-ids (find-respondents-gcm-ids message-id [message-user-id reply-user-id])]
 
-		  (send-gcm-message (replies-gcm-message notifiable-gcm-ids reply message-id notify-replier-message-type))))
+		  (when-not (empty? notifiable-gcm-ids)
+		  	(send-gcm-message 
+		  		(replies-gcm-message notifiable-gcm-ids reply message-id notify-replier-message-type)))))

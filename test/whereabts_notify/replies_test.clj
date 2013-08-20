@@ -62,12 +62,19 @@
 	(provided
 		(send-gcm-message anything) => anything :times 0))
 
-(fact "should notify other message repliers on new reply"
+(fact "should notify other message respondents on new reply"
 	(notify-message-repliers reply-details) => anything
 	(provided
 		(find-reply-with-user reply-id) => reply :times 1
 		(find-respondents-gcm-ids message-id anything) => ["abc"] :times 1
 		(send-gcm-message gcm-message-to-respondents) => anything :times 1))
+
+(fact "should not notify other message respondents on new reply, when there isnt any"
+	(notify-message-repliers reply-details) => anything
+	(provided
+		(find-reply-with-user reply-id) => reply :times 1
+		(find-respondents-gcm-ids message-id anything) => [] :times 1
+		(send-gcm-message anything) => anything :times 0))
 
 (fact "should find respondents gcm ids"
 	(find-respondents-gcm-ids message-id [user-id]) => ["aBc"]
