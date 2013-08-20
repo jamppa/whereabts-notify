@@ -21,13 +21,16 @@
 	:user-id user-id 
 	:reply-id reply-id})
 
-(def reply-gcm-message {
+(def gcm-message-to-owner {
 		:registration_ids ["abc"] 
 		:data {
-			:type "TYPE_MESSAGE_REPLY" 
+			:type notify-owner-message-type
 			:message-id message-id
 			:reply-nick "jami"
 			:reply-message "cool!"}})
+
+(def gcm-message-to-respondents 
+	(assoc-in gcm-message-to-owner [:data :type] notify-replier-message-type))
 
 (fact "should find reply with userprofile"
 	(find-reply-with-user reply-id) => reply
@@ -50,9 +53,9 @@
 		(notify-message-owner-on-reply reply "abc" "509d513f61395f0ebbd5e60a") => anything :times 0))
 
 (fact "should send gcm-message when notifying message owner on reply"
-	(notify-message-owner-on-reply reply "abc" message-id) => reply-gcm-message
+	(notify-message-owner-on-reply reply "abc" message-id) => gcm-message-to-owner
 	(provided
-		(send-gcm-message reply-gcm-message) => reply-gcm-message :times 1))
+		(send-gcm-message gcm-message-to-owner) => gcm-message-to-owner :times 1))
 
 (fact "should not send gcm-message when gcm-id is nil"
 	(notify-message-owner-on-reply reply nil message-id) => anything
@@ -64,7 +67,7 @@
 	(provided
 		(find-reply-with-user reply-id) => reply :times 1
 		(find-respondents-gcm-ids message-id anything) => ["abc"] :times 1
-		(send-gcm-message reply-gcm-message) => anything :times 1))
+		(send-gcm-message gcm-message-to-respondents) => anything :times 1))
 
 (fact "should find respondents gcm ids"
 	(find-respondents-gcm-ids message-id [user-id]) => ["aBc"]

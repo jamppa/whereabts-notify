@@ -8,10 +8,10 @@
 (def notify-owner-message-type "TYPE_MESSAGE_REPLY")
 (def notify-replier-message-type "TYPE_MESSAGE_REPLY_REPLIER")
 
-(defn- replies-gcm-message [gcm-ids reply message-id]
+(defn- replies-gcm-message [gcm-ids reply message-id type]
 	(gcm-message gcm-ids
 		{
-			:type notify-owner-message-type 
+			:type type
 			:message-id message-id
 			:reply-nick (get-in reply [:user-profile :nick])
 			:reply-message (get-in reply [:replymessage])}))
@@ -33,7 +33,7 @@
 (defn notify-message-owner-on-reply [reply user-gcm-id message-id]
 	(when (every? identity [reply user-gcm-id message-id])			; there is a chance that user-gcm-id is missing
 			(send-gcm-message 
-				(replies-gcm-message [user-gcm-id] reply message-id))))
+				(replies-gcm-message [user-gcm-id] reply message-id notify-owner-message-type))))
 
 (defn notify-message-owner [reply-details]
 	(let [reply (find-reply-with-user (:reply-id reply-details))
@@ -52,4 +52,4 @@
 		  reply-user-id (:user_id reply)
 		  notifiable-gcm-ids (find-respondents-gcm-ids message-id [message-user-id reply-user-id])]
 
-		  (send-gcm-message (replies-gcm-message notifiable-gcm-ids reply message-id))))
+		  (send-gcm-message (replies-gcm-message notifiable-gcm-ids reply message-id notify-replier-message-type))))
