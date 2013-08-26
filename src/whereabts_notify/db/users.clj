@@ -8,8 +8,9 @@
 (def user-profiles-coll "profiles")
 
 (defn find-user [id]
+	(let [user-oid (ObjectId. (.toString id))]
 	(monger-col/find-one-as-map 
-		users-coll {:_id (ObjectId. id)}))
+		users-coll {:_id user-oid})))
 
 (defn find-user-gcm-id [id]
 	(:gcm-id (find-user id)))

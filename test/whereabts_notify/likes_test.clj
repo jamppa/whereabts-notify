@@ -20,3 +20,18 @@
 (def like-details-same-user (assoc-in like-details [:message-owner-id] "asd123"))
 (fact "should be liking own message when user-id and message-owner-id are the same"
 	(liking-own-message? like-details-same-user) => true)
+
+(def built-like-gcm-message {
+	:registration_ids ["user-gcm-id"]
+	:data {
+		:type like-message-type
+		:message-id (:message-id like-details)
+		:nick "jamppa"
+		}
+	})
+
+(fact "should build like gcm message from details"
+	(build-like-gcm-message like-details) => built-like-gcm-message
+	(provided 
+		(find-profile-by-user-id "asd123") => {:nick "jamppa"} :times 1
+		(find-user-gcm-id "qwe123") => "user-gcm-id" :times 1))
