@@ -9,8 +9,8 @@
 (def redis-pool (carmine/make-conn-pool))
 (def redis-spec (carmine/make-conn-spec))
 
-(defn -main
-  [& args]
+(defn -main [& args]
   (db-connect)
   (carmine/with-new-pubsub-listener 
-  	redis-spec message-handlers (carmine/subscribe reply-channel)))
+  	redis-spec message-handlers 
+  	(carmine/subscribe reply-channel likes-channel)))
