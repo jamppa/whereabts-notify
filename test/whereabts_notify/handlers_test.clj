@@ -33,7 +33,7 @@
 		(notify-message-owner nil) => anything :times 0
 		(notify-message-repliers nil) => anything :times 0))
 
-(def like-details {:user-id "asd123" :message-id "asd123"})
+(def like-details {:user-id "asd123" :message-owner-id "qwe123" :message-id "asd123"})
 (def likes-channel-msg ["message" "message.likes" like-details])
 (def likes-channel-msg-invalid ["message" "message.likes" {:some "thing"}])
 

@@ -17,6 +17,7 @@
 (def like-details-validation
 	(validation-set
 		(presence-of :user-id)
+		(presence-of :message-owner-id)
 		(presence-of :message-id)))
 
 (defn- details-from-msg [msg]
