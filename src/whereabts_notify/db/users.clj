@@ -15,8 +15,9 @@
 	(:gcm-id (find-user id)))
 
 (defn find-profile-by-user-id [user-id]
+	(let [user-oid (ObjectId. (.toString user-id))]
 	(monger-col/find-one-as-map 
-		user-profiles-coll {:user_id user-id}))
+		user-profiles-coll {:user_id user-oid})))
 
 (defn with-profile [obj]
 	(if (contains? obj :user_id)
