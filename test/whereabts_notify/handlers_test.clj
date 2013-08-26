@@ -33,11 +33,16 @@
 		(notify-message-owner nil) => anything :times 0
 		(notify-message-repliers nil) => anything :times 0))
 
-
 (def like-details {:user-id "asd123" :message-id "asd123"})
 (def likes-channel-msg ["message" "message.likes" like-details])
+(def likes-channel-msg-invalid ["message" "message.likes" {:some "thing"}])
 
 (fact "should notify message owner on new like when details are valid"
 	(likes-handler likes-channel-msg) => anything
 	(provided
 		(notify-message-owner-on-like like-details) => like-details :times 1))
+
+(fact "should not notify message owner on new like when details are not valid"
+	(likes-handler likes-channel-msg-invalid) => anything
+	(provided
+		(notify-message-owner-on-like anything) => anything :times 0))
