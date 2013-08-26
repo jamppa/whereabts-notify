@@ -1,15 +1,16 @@
 (ns whereabts-notify.handlers-test
 	(:use 
-		[midje.sweet]
-		[whereabts-notify.handlers]
-		[whereabts-notify.replies]))
+		midje.sweet
+		whereabts-notify.handlers
+		whereabts-notify.replies
+		whereabts-notify.likes))
 
 (def reply-details {:user-id "123" :message-id "abc" :reply-id "456"})
 (def reply-channel-msg ["message" "message.replies" reply-details])
 (def reply-channel-msg-invalid ["message" "message.replies" {}])
 (def reply-channel-msg-with-nil ["type" "channel"])
 
-(fact "should define message handlers so that it includes handler for replies"
+(fact "should define message handlers for each channel"
 	message-handlers => {
 		"message.replies" reply-handler
 		"message.likes" likes-handler})
@@ -31,3 +32,12 @@
 	(provided 
 		(notify-message-owner nil) => anything :times 0
 		(notify-message-repliers nil) => anything :times 0))
+
+
+(def like-details {:user-id "asd123" :message-id "asd123"})
+(def likes-channel-msg ["message" "message.likes" like-details])
+
+(fact "should notify message owner on new like when details are valid"
+	(likes-handler likes-channel-msg) => anything
+	(provided
+		(notify-message-owner-on-like like-details) => like-details :times 1))

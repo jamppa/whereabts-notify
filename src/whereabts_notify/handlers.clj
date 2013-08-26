@@ -1,6 +1,7 @@
 (ns whereabts-notify.handlers
 	(:use 
 		[whereabts-notify.replies]
+		[whereabts-notify.likes]
 		[validateur.validation])
 	(:require [taoensso.carmine :as carmine]))
 
@@ -21,18 +22,18 @@
 (defn- details-from-msg [msg]
 	(get msg 2))
 
-(defn- valid-details? [details]
-	(valid? reply-details-validation details))
-
 (defn reply-handler [msg]
 	(let [reply-details (details-from-msg msg)]
-	(when (valid-details? reply-details) 
+	(when (valid? reply-details-validation reply-details) 
 		(notify-message-owner reply-details)
 		(notify-message-repliers reply-details))
 	msg))
 
 (defn likes-handler [msg]
-	)
+	(let [like-details (details-from-msg msg)]
+		(when (valid? like-details-validation like-details)
+			(notify-message-owner-on-like like-details))
+		msg))
 
 (def message-handlers
 	{
