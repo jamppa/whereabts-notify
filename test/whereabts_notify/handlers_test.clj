@@ -10,7 +10,9 @@
 (def reply-channel-msg-with-nil ["type" "channel"])
 
 (fact "should define message handlers so that it includes handler for replies"
-	message-handlers => {"message.replies" reply-handler})
+	message-handlers => {
+		"message.replies" reply-handler
+		"message.likes" likes-handler})
 
 (fact "should notify message owner and repliers when details are valid"
 	(reply-handler reply-channel-msg) => reply-channel-msg

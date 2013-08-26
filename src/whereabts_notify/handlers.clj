@@ -5,11 +5,18 @@
 	(:require [taoensso.carmine :as carmine]))
 
 (def reply-channel "message.replies")
+(def likes-channel "message.likes")
+
 (def reply-details-validation
 	(validation-set
 		(presence-of :message-id)
 		(presence-of :user-id)
 		(presence-of :reply-id)))
+
+(def like-details-validation
+	(validation-set
+		(presence-of :user-id)
+		(presence-of :message-id)))
 
 (defn- details-from-msg [msg]
 	(get msg 2))
@@ -24,5 +31,10 @@
 		(notify-message-repliers reply-details))
 	msg))
 
+(defn likes-handler [msg]
+	)
+
 (def message-handlers
-	{reply-channel reply-handler})
+	{
+		reply-channel reply-handler
+		likes-channel likes-handler})
