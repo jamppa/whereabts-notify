@@ -5,8 +5,11 @@
 
 (def follow-message-type "TYPE_MESSAGE_NEW_FOLLOWER")
 
-(defn follow-gcm-data [follower-profile]
-	nil)
+(defn follow-gcm-data [{fid :user_id nick :nick}]
+	{
+		:type follow-message-type
+		:follower-id (.toString fid)
+		:follower-nick nick})
 
 (defn build-follow-gcm-message [{follower-id :follower-id following-id :following-id}]
 	(let [follower-profile (find-profile-by-user-id follower-id)
