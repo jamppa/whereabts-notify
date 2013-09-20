@@ -13,4 +13,7 @@
   (db-connect)
   (carmine/with-new-pubsub-listener 
   	redis-spec message-handlers 
-  	(carmine/subscribe reply-channel likes-channel)))
+  	(carmine/subscribe 
+  		reply-channel 
+  		likes-channel 
+  		follow-channel)))
