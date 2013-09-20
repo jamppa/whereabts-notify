@@ -12,8 +12,7 @@
 		  (gcm-message [message-owner-gcm-id] {
 		  	:type like-message-type
 		  	:message-id (:message-id like-details)
-		  	:nick (:nick user-profile)
-		  	})))
+		  	:nick (:nick user-profile)})))
 
 (defn liking-own-message? [like-details]
 	(= (:user-id like-details) (:message-owner-id like-details)))

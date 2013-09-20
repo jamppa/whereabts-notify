@@ -1,4 +1,4 @@
-(ns whereabts-notify.handlers
+(ns whereabts-notify.handlers.handlers
 	(:use 
 		[whereabts-notify.replies]
 		[whereabts-notify.likes]

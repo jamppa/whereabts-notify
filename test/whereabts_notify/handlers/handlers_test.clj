@@ -1,7 +1,7 @@
-(ns whereabts-notify.handlers-test
+(ns whereabts-notify.handlers.handlers-test
 	(:use 
 		midje.sweet
-		whereabts-notify.handlers
+		whereabts-notify.handlers.handlers
 		whereabts-notify.replies
 		whereabts-notify.likes))
 

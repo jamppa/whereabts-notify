@@ -2,8 +2,8 @@
 	(:require 
 		[taoensso.carmine :as carmine])
 	(:use 
-		[whereabts-notify.handlers]
-		[whereabts-notify.db.conn])
+		whereabts-notify.handlers.handlers
+		whereabts-notify.db.conn)
   (:gen-class))
 
 (def redis-pool (carmine/make-conn-pool))
